@@ -1,6 +1,6 @@
 from GUI.Main_Widget import MainWidget
 from GUI.Main_Window import *
-from db import sign_in_db, info_about_user
+from db import sign_in_db
 from face_recognition import recognition
 
 
@@ -65,10 +65,12 @@ class SignInWidget(QWidget):
 
         # self.button_forget.setText('Забыли пароль?')
         # self.button_forget.setStyleSheet('''
+        #     color: gray;
         #     border: none;
         #     font-size: 15px;
         #     background: transparent;
         # ''')
+        # self.button_sign_in.clicked.connect(self.forget_password)
         # self.buttons_layout.addWidget(self.button_forget)
 
         self.button_sign_in.setText('Вход')
@@ -121,7 +123,6 @@ class SignInWidget(QWidget):
             color: white;
         ''')
         self.layout_right.addWidget(self.label_right)
-
 
         self.label_right_description.setText('\nЕще не зарегистированны?')
         self.label_right_description.setAlignment(QtCore.Qt.AlignCenter)
@@ -194,3 +195,8 @@ class SignInWidget(QWidget):
             except:
                 from GUI.Main_Window import error_db
                 error_db('Ошибка при проверке пароля')
+
+    # def forget_password(self):
+    #     from GUI.Password import PaswordWidget
+    #     self.window.update_widget(PaswordWidget(self.window))
+    #     self.window.background(3)

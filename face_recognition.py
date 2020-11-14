@@ -29,7 +29,14 @@ def recognition():
         frame = cv2.flip(frame, 1)
         count = 0
 
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        try:
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        except:
+            from GUI.Main_Window import error_db
+            error_db('Пользователи еще не созданы')
+            camera_capture.release()
+            cv2.destroyAllWindows()
+            break
 
         faces = face_detector.detectMultiScale(
             gray,
@@ -44,7 +51,7 @@ def recognition():
 
             id, confidence = face_recognizer.predict(gray[y:y + h, x:x + w])
 
-            if (confidence < 60):
+            if (confidence <= 40):
                 from db import info_about_user
                 fname, lname, email = info_about_user(id)
                 confirm = True

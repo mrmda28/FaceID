@@ -1,5 +1,4 @@
 from GUI.Loading import LoadingWidget
-from GUI.Main_Widget import MainWidget
 from face_dataset import dataset
 from db import sign_up_db, get_id_user
 from GUI.Main_Window import *

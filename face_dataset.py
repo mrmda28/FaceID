@@ -1,4 +1,4 @@
-from db import photo_to_db, get_id_user
+from db import photo_to_db
 import os
 import cv2
 
