@@ -1,14 +1,23 @@
+from db import photo_to_db, get_id_user
 import os
 import cv2
 
-camera_capture = cv2.VideoCapture(0)
-camera_capture.set(3, 640)
-camera_capture.set(4, 480)
 
 face_detector = cv2.CascadeClassifier('Data/Training/haarcascade_frontalface_default.xml')
 
+img_path = 'Data/Images/user.jpg'
+
+
+def img_save_img():
+    with open(rf'{img_path}', 'rb') as file:
+        return file.read()
+
 def dataset(id_user):
-    count = 0
+    camera_capture = cv2.VideoCapture(0)
+    camera_capture.set(3, 640)
+    camera_capture.set(4, 480)
+
+    img_count = 0
 
     while (True):
         ret, frame = camera_capture.read()
@@ -18,15 +27,22 @@ def dataset(id_user):
 
         for (x, y, w, h) in faces:
             cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
-            count += 1
+            img_count += 1
 
-            cv2.imwrite(f'Data/Images/Users/{str(id_user)}.{str(count)}.jpg', gray[y:y + h, x:x + w])
+            cv2.imwrite(img_path, gray[y:y + h, x:x + w])
+
+            img_save_img()
+
+            photo_to_db(id_user, img_save_img())
+
+            path_img = os.path.join(os.path.abspath(os.path.dirname(__file__)), img_path)
+            os.remove(path_img)
 
             cv2.imshow('Save your face', frame)
 
         k = cv2.waitKey(100) & 0xff
-        if k == 27 or count >= 40:
-            break
 
-    camera_capture.release()
-    cv2.destroyAllWindows()
+        if k == 27 or img_count >= 40:
+            camera_capture.release()
+            cv2.destroyAllWindows()
+            break

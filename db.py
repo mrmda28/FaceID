@@ -56,31 +56,29 @@ def get_id_user(first_name):
         from GUI.Main_Window import error_db
         error_db('Ошибка при получении id пользователя')
 
-# def photo_to_db(id, shot):
-#     try:
-#         with db.atomic():
-#             Images.create(
-#                 image = shot)
-#
-#             image = Images.get(Images.image == shot)
-#             id_img = image.id_image
-#
-#             User_Image.create(
-#                 id_user = id,
-#                 id_image = id_img)
-#     except:
-#         from GUI.Main_Window import error_db
-#         error_db()
+def photo_to_db(id, shot):
+    try:
+        with db.atomic():
+            Images.create(
+                image = shot)
 
-# def photo_from_db(id):
-#     try:
-#         with db.atomic():
-#             image = Images.get(Images.id_image == id)
-#             return image.image
-#
-#     except:
-#         from GUI.Main_Window import error_db
-#         error_db()
+            image = Images.get(Images.image == shot)
+            id_img = image.id_image
+
+            User_Image.create(
+                id_user = id,
+                id_image = id_img)
+    except:
+        print('error photo_to_db')
+
+def get_id_from_img(img):
+    try:
+        with db.atomic():
+            id_img = Images.get(Images.image == img) # get id image
+            user_img = User_Image.get(User_Image.id_image == id_img) # get id user
+            return user_img.id_user # return id user
+    except:
+        print('error get_id_from_img')
 
 def info_about_user(id):
     try:

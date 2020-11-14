@@ -1,4 +1,4 @@
-from PyQt5 import QtCore
+from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout, QLabel, QMainWindow, QWidget, \
     QDesktopWidget, QMessageBox, QPushButton, QLineEdit
 from PyQt5.QtCore import QTimer
@@ -15,6 +15,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         self.setWindowTitle(self.WINDOW_TITLE)
+        self.setWindowIcon(QtGui.QIcon('Data/Images/Icons/faceid_blue_icon.png'))
         self.setStyleSheet('background: url(Data/Images/bg_sign_in.png);')
         self.center_on_screen()
         self.update_widget(SignInWidget(self))

@@ -31,7 +31,7 @@ class SignUpWidget(QWidget):
         # -------- Left --------#
         self.layout_right.addStretch(1)
 
-        self.label_right.setText('Приветствую!')
+        self.label_right.setText('Введите данные,\nдалее будет FaceID')
         self.label_right.setAlignment(QtCore.Qt.AlignCenter)
         self.label_right.setStyleSheet('''
             font-size: 35px;
@@ -175,21 +175,3 @@ class SignUpWidget(QWidget):
         from GUI.Sign_In import SignInWidget
         self.window.update_widget(SignInWidget(self.window))
         self.window.background(1)
-    #
-    # def sign_up(self):
-    #     first_name = self.input_firstname.text()
-    #     last_name = self.input_lastname.text()
-    #     email = self.input_email.text()
-    #     password = self.input_password.text()
-    #
-    #     if (first_name and last_name and email and password) == '':
-    #         self.message.setText('Введите все данные')
-    #         self.message.setStyleSheet('background-color: white;')
-    #         self.message.exec_()
-    #     else:
-    #         try:
-    #             sign_up_db(first_name, last_name, email, password)
-    #             self.window.update_widget(MainWidget(self.window, first_name))
-    #             self.window.background(3)
-    #         except:
-    #             error_db()

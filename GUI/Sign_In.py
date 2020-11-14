@@ -113,7 +113,7 @@ class SignInWidget(QWidget):
         # -------- Right --------#
         self.layout_right.addStretch(1)
 
-        self.label_right.setText('Приветствую!')
+        self.label_right.setText('Введите\nemail и пароль')
         self.label_right.setAlignment(QtCore.Qt.AlignCenter)
         self.label_right.setStyleSheet('''
             font-size: 35px;
@@ -157,8 +157,11 @@ class SignInWidget(QWidget):
 
     def face_id_widget(self):
         id_user = recognition()
-        self.window.update_widget(MainWidget(self.window, id_user))
-        self.window.background(3)
+        if (id_user) is not None:
+            self.window.update_widget(MainWidget(self.window, id_user))
+            self.window.background(3)
+        else:
+            pass
 
     def sign_up_widget(self):
         from GUI.Sign_Up import SignUpWidget
